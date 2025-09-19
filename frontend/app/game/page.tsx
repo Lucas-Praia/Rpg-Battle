@@ -21,7 +21,6 @@ export default function GamePage() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
 
-  // Auto enemy turn
   useEffect(() => {
     if (gameState.state === "ENEMY_TURN") {
       const timer = setTimeout(() => {
@@ -31,7 +30,6 @@ export default function GamePage() {
     }
   }, [gameState.state])
 
-  // Check for game end
   useEffect(() => {
     if (gameState.state === "ENDED" && gameState.playerHP > 0 && gameState.enemyHP <= 0) {
       setShowScoreModal(true)
@@ -63,7 +61,6 @@ export default function GamePage() {
       })
 
       setShowScoreModal(false)
-      // Redirect to ranking after success
       window.location.href = "/ranking"
     } catch (error) {
       toast({
@@ -81,38 +78,6 @@ export default function GamePage() {
     setPlayerName("")
     setShowScoreModal(false)
     dispatch({ type: "RESET" })
-  }
-
-  if (!gameStarted) {
-    return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-purple-50 to-pink-50 dark:from-gray-900 dark:via-blue-900 dark:to-purple-900 flex items-center justify-center p-4">
-        <Card className="w-full max-w-md p-8">
-          <h1 className="text-3xl font-bold mb-6 text-center">⚔️ Iniciar Batalha</h1>
-
-          <div className="space-y-4">
-            <div>
-              <label className="block text-sm font-medium mb-2">Nome do Jogador:</label>
-              <Input
-                type="text"
-                placeholder="Digite seu nome (máx. 15 caracteres)"
-                value={playerName}
-                onChange={(e) => setPlayerName(e.target.value)}
-                onKeyPress={(e) => e.key === "Enter" && handleStartGame()}
-                maxLength={15}
-              />
-            </div>
-
-            <Button
-              onClick={handleStartGame}
-              disabled={!playerName.trim() || playerName.trim().length > 15}
-              className="w-full"
-            >
-              Começar Jogo
-            </Button>
-          </div>
-        </Card>
-      </div>
-    )
   }
 
   return (

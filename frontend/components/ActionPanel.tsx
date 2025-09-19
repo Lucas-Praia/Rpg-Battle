@@ -22,7 +22,7 @@ export default function ActionPanel({
   disabled,
 }: ActionPanelProps) {
   return (
-    <div className="bg-card p-6 rounded-lg shadow">
+    <div className="bg-[#1f2937] p-6 rounded-lg shadow">
       <h3 className="text-xl font-bold text-center mb-4">Ações</h3>
 
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">

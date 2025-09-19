@@ -15,20 +15,13 @@ export default function HealthBar({ name, hp, max, stunned }: HealthBarProps) {
   }
 
   return (
-    <div className="bg-card p-4 rounded-lg shadow">
+    <div className="bg-[#1f2937] p-4 rounded-lg shadow">
       <div className="flex items-center justify-between mb-2">
         <h3 className="font-bold">{name}</h3>
         {stunned && <span className="text-sm bg-yellow-100 dark:bg-yellow-900 px-2 py-1 rounded">😵 Atordoado</span>}
       </div>
 
-      <div
-        className="w-full bg-muted rounded-full h-6 overflow-hidden"
-        role="progressbar"
-        aria-valuenow={hp}
-        aria-valuemin={0}
-        aria-valuemax={max}
-        aria-label={`${name} tem ${hp} de ${max} pontos de vida`}
-      >
+      <div className="w-full bg-muted rounded-full h-6 overflow-hidden">
         <div className={`h-full transition-all duration-500 ${getColor()}`} style={{ width: `${percentage}%` }} />
       </div>
 

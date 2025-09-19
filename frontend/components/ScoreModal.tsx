@@ -24,7 +24,7 @@ export default function ScoreModal({ isOpen, onClose, onSubmit, score, isSubmitt
 
   return (
     <Dialog open={isOpen} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="bg-[#1f2937] ">
         <DialogHeader>
           <DialogTitle>🎉 Parabéns! Você venceu!</DialogTitle>
         </DialogHeader>
@@ -50,8 +50,8 @@ export default function ScoreModal({ isOpen, onClose, onSubmit, score, isSubmitt
           <div className="flex space-x-2">
             <Button
               onClick={handleSubmit}
-              disabled={!name.trim() || name.trim().length > 15 || isSubmitting}
-              className="flex-1"
+              disabled={!name.trim() || isSubmitting}
+              className="flex-1 bg-green-600 text-white hover:bg-green-400"
             >
               {isSubmitting ? "Salvando..." : "Salvar no Ranking"}
             </Button>
