@@ -1,0 +1,17 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+model Player {
+  id         Int      @id @default(autoincrement())
+  playerName String
+  date       DateTime @default(now())
+  score      Int
+
+  @@index([score])
+}

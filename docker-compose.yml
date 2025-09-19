@@ -1,0 +1,37 @@
+name: battle-stack
+services:
+  api:
+    build:
+      context: ./api
+      dockerfile: Dockerfile
+    container_name: api
+    environment:
+      # Banco SQLite persistido fora da imagem
+      DATABASE_URL: "file:/data/dev.db"
+      PORT: "3030"
+      NODE_ENV: "production"
+    volumes:
+      # Mantém somente os dados do SQLite; migrações continuam dentro da imagem
+      - api_data:/data
+    ports:
+      - "3030:3030"
+    restart: unless-stopped
+
+  web:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: web
+    environment:
+      # O Next consumirá o backend via serviço 'api' na rede do compose
+      NEXT_PUBLIC_API_URL: "http://api:3030"
+      NODE_ENV: "production"
+      PORT: "3000"
+    ports:
+      - "3000:3000"
+    depends_on:
+      - api
+    restart: unless-stopped
+
+volumes:
+  api_data:
